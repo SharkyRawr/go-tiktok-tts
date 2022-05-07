@@ -4,7 +4,7 @@
 
 ### Example:
 ```go
-    tts, err := TTS(tiktok_tts.VoiceEnglishFem1, "Hello World")
+    tts, err := tiktok_tts.TTS(tiktok_tts.VoiceEnglishFem1, "Hello World")
     if err != nil { /* ... */ }
 
     buf, err := base64.StdEncoding.DecodeString(tts.Data.VStr)
