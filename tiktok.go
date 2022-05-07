@@ -114,7 +114,7 @@ type Data struct {
 // Generator Text-to-Speech MP3 data from string text with voice voice.
 //
 // Example:
-//   tts, err := TTS(tiktok_tts.VoiceEnglishFem1, "Hello World")
+//   tts, err := tiktok_tts.TTS(tiktok_tts.VoiceEnglishFem1, "Hello World")
 //   if err != nil { /* ... */ }
 //   buf, err := base64.StdEncoding.DecodeString(tts.Data.VStr)
 //   if err != nil { /* ... */ }
