@@ -8,6 +8,6 @@ func TestTTS(t *testing.T) {
 		t.Error(err)
 	}
 	if len(resp.Data.VStr) <= 0 {
-		t.Errorf("VStr is too short")
+		t.Errorf("VStr is too short: %s", resp.Message)
 	}
 }

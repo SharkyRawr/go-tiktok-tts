@@ -93,7 +93,7 @@ const (
 	VoiceRocket = "en_us_rocket"
 )
 
-const api_url = "https://api16-normal-useast5.us.tiktokv.com/media/api/text/speech/invoke/?text_speaker=%s&req_text=%s&speaker_map_type=0"
+const api_url = "https://api16-normal-useast5.us.tiktokv.com/media/api/text/speech/invoke/?text_speaker=%s&req_text=%s&speaker_map_type=0&aid=1233"
 
 // Text-to-Speech Response JSON struct
 type TTSResponse struct {
@@ -114,11 +114,12 @@ type Data struct {
 // Generator Text-to-Speech MP3 data from string text with voice voice.
 //
 // Example:
-//   tts, err := tiktok_tts.TTS(tiktok_tts.VoiceEnglishFem1, "Hello World")
-//   if err != nil { /* ... */ }
-//   buf, err := base64.StdEncoding.DecodeString(tts.Data.VStr)
-//   if err != nil { /* ... */ }
-//   // buf now contains MP3 file data which can be written to a file
+//
+//	tts, err := tiktok_tts.TTS(tiktok_tts.VoiceEnglishFem1, "Hello World")
+//	if err != nil { /* ... */ }
+//	buf, err := base64.StdEncoding.DecodeString(tts.Data.VStr)
+//	if err != nil { /* ... */ }
+//	// buf now contains MP3 file data which can be written to a file
 func TTS(voice Voice, text string) (TTSResponse, error) {
 	text = strings.ReplaceAll(text, "+", "plus")
 	text = strings.ReplaceAll(text, " ", "+")
