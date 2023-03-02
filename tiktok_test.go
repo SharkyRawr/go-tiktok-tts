@@ -3,7 +3,7 @@ package tiktok_tts
 import "testing"
 
 func TestTTS(t *testing.T) {
-	resp, err := TTS(VoiceEnglishFem1, "Testing")
+	resp, err := TTS(VoiceEnglishFem1, "Testing", "CHANGEME")
 	if err != nil {
 		t.Error(err)
 	}

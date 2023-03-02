@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/http/cookiejar"
+	"net/url"
 	"strings"
 )
 
@@ -120,13 +122,31 @@ type Data struct {
 //	buf, err := base64.StdEncoding.DecodeString(tts.Data.VStr)
 //	if err != nil { /* ... */ }
 //	// buf now contains MP3 file data which can be written to a file
-func TTS(voice Voice, text string) (TTSResponse, error) {
+func TTS(voice Voice, text string, sessionid string) (TTSResponse, error) {
 	text = strings.ReplaceAll(text, "+", "plus")
 	text = strings.ReplaceAll(text, " ", "+")
 	text = strings.ReplaceAll(text, "&", "and")
 
 	requestUrl := fmt.Sprintf(api_url, voice, text)
-	resp, err := http.Post(requestUrl, "text/plain", nil)
+	jar, err := cookiejar.New(nil)
+	if err != nil {
+		return TTSResponse{}, err
+	}
+
+	jar.SetCookies(&url.URL{
+		Scheme: "https",
+		Host:   "api16-normal-useast5.us.tiktokv.com",
+	}, []*http.Cookie{{
+		Name:  "sessionid",
+		Value: sessionid,
+	},
+	})
+
+	client := &http.Client{
+		Jar: jar,
+	}
+
+	resp, err := client.Post(requestUrl, "text/plain", nil)
 	if err != nil {
 		return TTSResponse{}, err
 	}
